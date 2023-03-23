@@ -36,7 +36,7 @@ public class JwtAuthAPI {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         UserEntity user = userSv.getByEmail(authenticationRequest.getEmail());
 
-        if (user != null && user.getDeleted() == true) {
+        if (user.getDeleted() == true) {
                 return ResponseEntity.badRequest().body("This account is deleted");
         }
 

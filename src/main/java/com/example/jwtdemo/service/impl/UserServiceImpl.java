@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
             );
             return userRepo.save(newUser);
 //        } else {
-//            return new UserEntity();
+//                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
 //        }
     }
 
@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Long id) {
-        UserEntity user = userRepo.findById(id).get();
+        UserEntity user = userRepo.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
 
         user.setDeleted(true);
         userRepo.save(user);
